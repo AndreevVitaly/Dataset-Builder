@@ -4,7 +4,6 @@ import os
 from pathlib import Path
 
 from .settings import BuilderSettings, SourceType, StepMode
-from .worker import DatasetBuildPipeline, StopRequested
 
 try:
     from PySide6.QtCore import QObject, QThread, Signal, Slot
@@ -47,6 +46,8 @@ class BuildWorker(QObject):
     @Slot()
     def run(self) -> None:
         try:
+            from .worker import DatasetBuildPipeline
+
             pipeline = DatasetBuildPipeline(
                 self.settings,
                 log=self.log.emit,
@@ -54,8 +55,6 @@ class BuildWorker(QObject):
                 should_stop=lambda: self._stop,
             )
             self.finished.emit(pipeline.run())
-        except StopRequested as exc:
-            self.failed.emit(str(exc))
         except Exception as exc:
             self.failed.emit(str(exc))
 
