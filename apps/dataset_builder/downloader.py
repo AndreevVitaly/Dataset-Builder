@@ -34,8 +34,7 @@ def download_youtube_video(url: str, temp_dir: Path, progress: ProgressCallback 
 
     options = {
         "outtmpl": output_template,
-        "format": "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/best",
-        "merge_output_format": "mp4",
+        "format": "best[ext=mp4][vcodec!=none]/best[vcodec!=none]/best",
         "noplaylist": True,
         "quiet": True,
         "no_warnings": True,

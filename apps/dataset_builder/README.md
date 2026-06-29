@@ -33,3 +33,5 @@ pip install -r requirements.txt
 ```
 
 YouTube downloading is limited to publicly available videos. The app does not bypass DRM, does not use paid or private videos, and does not use user accounts.
+
+The downloader requests a single video file so `ffmpeg` is not required for the basic dataset workflow.
